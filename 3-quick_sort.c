@@ -1,48 +1,55 @@
 #include "sort.h"
 /**
- * quick_sort - function that sorts an array of integers in ascending order using the Quick sort algorithm
+ * quick_sort - function that sorts an array
  * @array: the array
  * @size: the size of the array
  */
 void quick_sort(int *array, size_t size)
 {
-  QuickSort(array, 0, size - 1, size);
+QuickSort(array, 0, size - 1, size);
 }
 /**
- * QuickSort - quick sort
+ * QuickSort - quick sort alghoritm
  * @array: the array
  * @pos_ini: first position of the array
  * @pos_fin: last position of the array
+ * @size: size of array
  */
 void QuickSort(int *array, int pos_ini, int pos_fin, size_t size)
 {
-  int pivot = pos_fin, j = pos_ini, i = pos_ini - 1, aux;
+int pivot = pos_fin;
+int y = pos_ini, x = pos_ini - 1;
+int aux;
 
-  if (pos_ini == pos_fin)
-    return;
-  for (; j < pos_fin; j++)
-    {
-      if (array[j] < array[pivot])
-	{
-	  i++;
-	  if (array[j] < array[i])
-	    {
-	      aux = array[i];
-	      array[i] = array[j];
-	      array[j] = aux;
-	      print_array(array, size);
-	    }
-	}
-    }
-  if (array[i + 1] > array[pivot])
-    {
-      aux = array[i + 1];
-      array[i + 1] = array[pivot];
-      array[pivot] = aux;
-      print_array(array, size);
-    }
-  if (pos_ini <= i)
-    QuickSort(array, pos_ini, i, size);
-  if (i + 1 <= pos_fin)
-    QuickSort(array, i + 1, pos_fin, size);
+if (!array || pos_fin == -1)
+return;
+if (array[pos_ini] == array[pivot])
+return;
+
+for (; y < pos_fin; y++)
+{
+if (array[y] < array[pivot])
+{
+x++;
+if (array[y] < array[x])
+{
+aux = array[x];
+array[x] = array[y];
+array[y] = aux;
+print_array(array, size);
+}
+}
+}
+x++;
+if (array[x] > array[pivot])
+{
+aux = array[x];
+array[x] = array[pivot];
+array[pivot] = aux;
+print_array(array, size);
+}
+if (pos_ini <= x - 1)
+QuickSort(array, pos_ini, x - 1, size);
+if (x + 1 <= pos_fin)
+QuickSort(array, x + 1, pos_fin, size);
 }
